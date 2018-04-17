@@ -5,7 +5,8 @@
     "Helping you keeping your hands on the keyboard and not your mouth!",
   "icons": {"16": "nailimg.png", "48": "nailimg.png", "128": "nailimg.png"},
   "permissions": [
-    "notifications"
+    "notifications",
+    "storage"
   ],
   "browser_action": {
     "default_title": "Pop up Title",

@@ -110,15 +110,22 @@ chrome.notifications.onButtonClicked.addListener(function(notifId, btnIdx) {
 
   //check wich button was clicked:
   if (notifId === myNotificationID) {
-    
+
     //on success
     if (btnIdx === 0) {
         //window.open("...");
         progression += 25;
-        
+
         if(progression == 100){
           lvlup();
         }  
+        chrome.storage.sync.set({ "store": progression }, function(){
+          console.log('stored');
+        });
+        chrome.storage.sync.get("store", function(data){
+          console.log(data.store);
+        });
+
     //on Fail
     } else if (btnIdx === 1) {
         progression -= 25;
