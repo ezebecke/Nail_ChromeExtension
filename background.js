@@ -21,17 +21,17 @@ function showme(){
   }
   chrome.notifications.create("notfyId", {
     type:    "progress",
-    iconUrl: "nailimg.png",
+    iconUrl: "img/nailimg.png",
     title:   "REMINDER",
     message: "It's time to check if you bite your nails !",
     contextMessage: "lvl exp",
     progress: progression,
     buttons: [{
         title: "They are growing!",
-        iconUrl: "success.png"
+        iconUrl: "img/success.png"
     }, {
         title: "I failed",
-        iconUrl: "fail.png"
+        iconUrl: "img/fail.png"
     }]
 }, function(id) {
     myNotificationID = id;
@@ -44,7 +44,7 @@ function lvlup(){
   //lvl up notification progress
   chrome.notifications.create("progress100", {
     type:    "progress",
-    iconUrl: "nailimg.png",
+    iconUrl: "img/nailimg.png",
     title:   "LVL UP!",
     message: "Good job",
     contextMessage: "You made it",
@@ -55,10 +55,10 @@ function lvlup(){
   //lvl up notification image
   chrome.notifications.create("notfyId", {
     type:    "image",
-    iconUrl: "nailimg.png",
+    iconUrl: "img/nailimg.png",
     title:   "LVL UP!",
     message: "Good job",
-    imageUrl: "welldone.png",
+    imageUrl: "img/welldone.png",
 }, function(id) {
     myNotificationID = id;
 });
