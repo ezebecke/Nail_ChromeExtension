@@ -1,0 +1,22 @@
+{
+  "name": "Nail Keeper",
+  "version": "1.1",
+  "description":
+    "Helping you keeping your hands on the keyboard and not your mouth!",
+  "icons": {"16": "nailimg.png", "48": "nailimg.png", "128": "nailimg.png"},
+  "permissions": [
+    "notifications"
+  ],
+  "browser_action": {
+    "default_title": "Pop up Title",
+    "default_popup": "popup.html"
+  },
+  "options_page": "options.html",
+  "background": { "scripts": ["background.js"] },
+  "manifest_version": 2,
+
+
+  "web_accessible_resources": [
+    "nailimg.png"
+  ]
+}
