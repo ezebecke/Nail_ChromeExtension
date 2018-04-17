@@ -1,0 +1,21 @@
+body {
+    min-width: 250px;
+}
+img {
+    width: 50%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+h1 {
+    text-align: center;
+}
+
+.options {
+    text-decoration: none;
+    font-size: 1rem;
+}
+.options:hover {
+    color: rgb(19, 143, 19);
+}
