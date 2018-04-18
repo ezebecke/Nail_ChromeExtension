@@ -4,21 +4,14 @@
   permission in the manifest file (or calling
   "Notification.requestPermission" beforehand).
 */
+//track progress
+let progression = 0;
 
 //track button
 var myNotificationID = null;
 
-//track progress
-let progression = 0;
-
 function showme(){
 
-  if(progression == 100){
-    progression = 0;
-  }
-  if(progression < 0){
-    progression = 0;
-  }
   chrome.notifications.create("notfyId", {
     type:    "progress",
     iconUrl: "img/nailimg.png",
@@ -65,7 +58,8 @@ function lvlup(){
 }
 
 function lvldown() {
-  alert("you went down a lvl");
+  window.open("...");
+  //alert("you went down a lvl");
 
 }
 
@@ -82,21 +76,25 @@ if (!localStorage.isInitialized) {
   localStorage.isActivated = true;   // The display activation.
   localStorage.frequency = 1;        // The display frequency, in minutes.
   localStorage.isInitialized = true; // The option initialization.
+
 }
 
-// Test for notification support.
+// Test for notification support. 
 if (window.Notification) {
   // While activated, show notifications at the display frequency.
-  if (JSON.parse(localStorage.isActivated)) { showme(); }
+  if (JSON.parse(localStorage.isActivated)) {
+
+    chrome.storage.sync.get("store", function(data){
+      progression = data.store;
+      showme();
+    });
+  }
 
   var interval = 0; // The display interval, in minutes.
   setInterval(function() {
-    interval++;
 
-    if (
-      JSON.parse(localStorage.isActivated) &&
-        localStorage.frequency <= interval
-    ) {
+    interval++;
+    if (JSON.parse(localStorage.isActivated) && localStorage.frequency <= interval) {
       showme();
       interval = 0;
     }
@@ -113,27 +111,24 @@ chrome.notifications.onButtonClicked.addListener(function(notifId, btnIdx) {
 
     //on success
     if (btnIdx === 0) {
-        //window.open("...");
-        progression += 25;
-
-        if(progression == 100){
-          lvlup();
-        }  
-        chrome.storage.sync.set({ "store": progression }, function(){
-          console.log('stored');
-        });
-        chrome.storage.sync.get("store", function(data){
-          console.log(data.store);
-        });
-
-    //on Fail
-    } else if (btnIdx === 1) {
-        progression -= 25;
-        
-        if(progression < 0){
-          lvldown();
-        }
+      //window.open("...");
+      progression += 25;
+      if(progression == 100) {
+        lvlup();
+        progression = 0;
+      } 
     }
+    //on Fail
+    else if (btnIdx === 1) {
+      progression -= 25;
+      if(progression < 0) {
+        lvldown();
+        progression = 0;
+      }
+    }
+     //Set storage
+     chrome.storage.sync.set({ "store": progression }, function(){
+    });
   }
   
 });
