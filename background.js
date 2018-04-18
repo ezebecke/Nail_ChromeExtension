@@ -1,6 +1,9 @@
 //track progress
 let progression = 0;
 
+//track lvl
+let lvl = 0;
+
 //track button
 var myNotificationID = null;
 
@@ -14,11 +17,11 @@ if (!localStorage.isInitialized) {
 // Test for notification support. 
 if (window.Notification) {
   // While activated, show notifications at the display frequency.
-  if (JSON.parse(localStorage.isActivated)) {
-    chrome.storage.sync.get("store", function(data){
-      progression = data.store;
+  if (JSON.parse(localStorage.isActivated)) {  //FIX HERE
+    //chrome.storage.sync.get("store", function(data){
+      //progression = data.store;
       showme();
-    });
+    //});
   }
   var interval = 0; // The display interval, in minutes.
   setInterval(function() {
@@ -43,7 +46,7 @@ function showme(){
     iconUrl: "img/nailimg.png",
     title:   "ALERT",
     message: "It's time to check if you are biting your nails!",
-    contextMessage: "lvl exp",
+    contextMessage: "lvl exp: "+ progression + "%",
     progress: progression,
     buttons: [{
         title: "I'm keeping them out off my mouth!",
@@ -59,6 +62,8 @@ function showme(){
 
 //function when lvl up!
 function lvlup(){
+
+  lvl = lvl + 1;
 
   //notification progress 100%
   chrome.notifications.create("progress100", {
@@ -86,6 +91,8 @@ function lvlup(){
 
 //Function when lvl down
 function lvldown() {
+
+  lvl =-1;
   //window.open("...");
   alert("you went down a lvl");
 }

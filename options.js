@@ -10,6 +10,10 @@ function ghost(isDeactivated) {
 }
 
 window.addEventListener('load', function() {
+
+  document.getElementById('lvl').innerHTML = lvl;
+  document.getElementById('insertexp').innerHTML = (progression +"%");
+
   // Initialize the option controls.
   options.isActivated.checked = JSON.parse(localStorage.isActivated);
                                          // The display activation.
