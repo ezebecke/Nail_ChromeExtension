@@ -17,11 +17,19 @@ if (!localStorage.isInitialized) {
 // Test for notification support. 
 if (window.Notification) {
   // While activated, show notifications at the display frequency.
-  if (JSON.parse(localStorage.isActivated)) {  //FIX HERE
-    //chrome.storage.sync.get("store", function(data){
-      //progression = data.store;
+  if (JSON.parse(localStorage.isActivated)) {
+    chrome.storage.sync.get("store", function(data){
+      //continue only if data.store is not undefined!
+      if (typeof data.store !== "undefined"){
+        progression = data.store;
+      }
       showme();
-    //});
+    });
+    chrome.storage.sync.get( "nivel", function(lvlcheck){
+      if (typeof lvlcheck.nivel !== "undefined"){
+        lvl = lvlcheck.nivel;
+      }
+    });
   }
   var interval = 0; // The display interval, in minutes.
   setInterval(function() {
@@ -62,8 +70,9 @@ function showme(){
 
 //function when lvl up!
 function lvlup(){
-
-  lvl = lvl + 1;
+  lvl++;
+  chrome.storage.sync.set({ "nivel": lvl }, function(){
+  });
 
   //notification progress 100%
   chrome.notifications.create("progress100", {
@@ -92,7 +101,9 @@ function lvlup(){
 //Function when lvl down
 function lvldown() {
 
-  lvl =-1;
+  lvl--;
+  chrome.storage.sync.set({ "nivel": lvl }, function(){
+  });
   //window.open("...");
   alert("you went down a lvl");
 }

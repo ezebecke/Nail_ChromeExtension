@@ -11,7 +11,7 @@ function ghost(isDeactivated) {
 
 window.addEventListener('load', function() {
 
-  document.getElementById('lvl').innerHTML = lvl;
+  document.getElementById('nivelador').innerHTML = lvl;
   document.getElementById('insertexp').innerHTML = (progression +"%");
 
   // Initialize the option controls.
