@@ -15,3 +15,15 @@ How to use it:
 4-Click the LOAD UNPACKED button and select the extension directory.
 
 These version is set it to work every 10s. 
+
+Popup Notification:
+
+![NailNotification](https://github.com/ezebecke/Nail_ChromeExtension/blob/master/img/nailimg1.JPG)
+
+Settings:
+
+![NailNotification2](https://github.com/ezebecke/Nail_ChromeExtension/blob/master/img/img2.JPG)
+
+Lvl Up!:
+
+![lvlupNotification](https://github.com/ezebecke/Nail_ChromeExtension/blob/master/img/lvlup.JPG)
