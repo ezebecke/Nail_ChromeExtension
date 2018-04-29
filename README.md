@@ -16,7 +16,7 @@ How to use it:
 
 These version is set it to work every 10s. 
 
-Popup Notification:
+Popup Notification (WINDOWS VERSION):
 
 ![NailNotification](https://github.com/ezebecke/Nail_ChromeExtension/blob/master/img/nailimg1.JPG)
 
