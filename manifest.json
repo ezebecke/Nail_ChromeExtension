@@ -9,13 +9,11 @@
     "storage"
   ],
   "browser_action": {
-    "default_title": "Pop up Title",
+    "default_title": "Nail Keeper",
     "default_popup": "popup.html"
   },
   "background": { "scripts": ["background.js"] },
   "manifest_version": 2,
-
-
   "web_accessible_resources": [
     "img/nailimg.png"
   ]

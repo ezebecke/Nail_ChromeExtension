@@ -1,10 +1,6 @@
-//track progress
+
 let progression = 0;
-
-//track lvl
 let lvl = 0;
-
-//track button
 var myNotificationID = null;
 
 // Conditionally initialize the options.
@@ -23,7 +19,6 @@ if (window.Notification) {
       if (typeof data.store !== "undefined"){
         progression = data.store;
       }
-      showme();
     });
     chrome.storage.sync.get( "nivel", function(lvlcheck){
       if (typeof lvlcheck.nivel !== "undefined"){
@@ -38,9 +33,8 @@ if (window.Notification) {
       showme();
       interval = 0;
     }
-  }, 10000); //60000 when not in test mode
+  }, 60000); //60000 when not in test mode
 }
-
 
 /*
 *   FUNCTIONS AND LISTENERS
@@ -48,12 +42,12 @@ if (window.Notification) {
 
 //Function to show nail progress and buttons
 function showme(){
-
+  console.log(localStorage.frequency);
   chrome.notifications.create("notfyId", {
     type:    "progress",
     iconUrl: "img/nailimg.png",
-    title:   "ALERT",
-    message: "It's time to check if you are biting your nails!",
+    title:   "Be honest with yourself!",
+    message: "It's time to check if you were biting your nails!",
     contextMessage: "lvl exp: "+ progression + "%",
     progress: progression,
     buttons: [{
@@ -65,7 +59,7 @@ function showme(){
     }]
 }, function(id) {
     myNotificationID = id;
-});
+  });
 }
 
 //function when lvl up!
@@ -80,11 +74,11 @@ function lvlup(){
     iconUrl: "img/nailimg.png",
     title:   "LVL UP!",
     message: "Good job",
-    contextMessage: "You made it",
+    contextMessage: "You made it to lvl: "+lvl+", keep resisting!",
     progress: 100
   }, function(id) {
-    myNotification100= id;
-  });
+      myNotification100= id;
+    });
 
   //notification lvl up with image
   chrome.notifications.create("notfyId", {
@@ -94,8 +88,8 @@ function lvlup(){
     message: "Good job",
     imageUrl: "img/welldone.png",
   }, function(id) {
-    myNotificationID = id;
-  });
+      myNotificationID = id;
+    });
 }
 
 //Function when lvl down
@@ -104,8 +98,15 @@ function lvldown() {
   lvl--;
   chrome.storage.sync.set({ "nivel": lvl }, function(){
   });
-  //window.open("...");
-  alert("you went down a lvl");
+
+  chrome.notifications.create("lvldown", {
+    type:    "basic",
+    iconUrl: "img/fail.png",
+    title:   "LVL DOWN!",
+    message: "Come on bud, your nails are gross!",
+  }, function(id) {
+    myNotification100= id;
+  });
 }
 
 //Listener when user click notification buttons
@@ -117,7 +118,6 @@ chrome.notifications.onButtonClicked.addListener(function(notifId, btnIdx) {
   if (notifId === myNotificationID) {
     //on success
     if (btnIdx === 0) {
-      //window.open("...");
       progression += 25;
       if(progression == 100) {
         lvlup();
@@ -129,19 +129,11 @@ chrome.notifications.onButtonClicked.addListener(function(notifId, btnIdx) {
       progression -= 25;
       if(progression < 0) {
         lvldown();
-        progression = 0;
+        progression = 75;
       }
     }
      //Set storage
      chrome.storage.sync.set({ "store": progression }, function(){
     });
-  }
-});
-
-/* Handle the user's clicking 
- * the small 'x' on the top right corner */
-chrome.notifications.onClosed.addListener(function(notificationId, byUser) {
-  if (byUser == true){
-    alert("you are not supposed to close it!")
   }
 });

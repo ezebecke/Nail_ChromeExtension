@@ -1,4 +1,3 @@
-
 /*
   Grays out or [whatever the opposite of graying out is called] the option
   field.
@@ -8,9 +7,7 @@ function ghost(isDeactivated) {
                                               // The label color.
   options.frequency.disabled = isDeactivated; // The control manipulability.
 }
-
 window.addEventListener('load', function() {
-
   document.getElementById('nivelador').innerHTML = lvl;
   document.getElementById('insertexp').innerHTML = (progression +"%");
 
@@ -19,7 +16,6 @@ window.addEventListener('load', function() {
                                          // The display activation.
   options.frequency.value = localStorage.frequency;
                                          // The display frequency, in minutes.
-
   if (!options.isActivated.checked) { ghost(true); }
 
   // Set the display activation and frequency.
