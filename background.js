@@ -5,23 +5,23 @@ var myNotificationID = null;
 
 // Conditionally initialize the options.
 if (!localStorage.isInitialized) {
-  localStorage.isActivated = true;   // The display activation.
-  localStorage.frequency = 1;        // The display frequency, in minutes.
+  localStorage.isActivated = true; // The display activation.
+  localStorage.frequency = 1; // The display frequency, in minutes.
   localStorage.isInitialized = true; // The option initialization.
 }
 
-// Test for notification support. 
+// Test for notification support.
 if (window.Notification) {
   // While activated, show notifications at the display frequency.
   if (JSON.parse(localStorage.isActivated)) {
-    chrome.storage.sync.get("store", function(data){
+    chrome.storage.sync.get("store", function(data) {
       //continue only if data.store is not undefined!
-      if (typeof data.store !== "undefined"){
+      if (typeof data.store !== "undefined") {
         progression = data.store;
       }
     });
-    chrome.storage.sync.get( "nivel", function(lvlcheck){
-      if (typeof lvlcheck.nivel !== "undefined"){
+    chrome.storage.sync.get("nivel", function(lvlcheck) {
+      if (typeof lvlcheck.nivel !== "undefined") {
         lvl = lvlcheck.nivel;
       }
     });
@@ -29,7 +29,10 @@ if (window.Notification) {
   var interval = 0; // The display interval, in minutes.
   setInterval(function() {
     interval++;
-    if (JSON.parse(localStorage.isActivated) && localStorage.frequency <= interval) {
+    if (
+      JSON.parse(localStorage.isActivated) &&
+      localStorage.frequency <= interval
+    ) {
       showme();
       interval = 0;
     }
@@ -63,10 +66,9 @@ function showme(){
 }
 
 //function when lvl up!
-function lvlup(){
+function lvlup() {
   lvl++;
-  chrome.storage.sync.set({ "nivel": lvl }, function(){
-  });
+  chrome.storage.sync.set({ nivel: lvl }, function() {});
 
   //notification progress 100%
   chrome.notifications.create("progress100", {
@@ -94,7 +96,6 @@ function lvlup(){
 
 //Function when lvl down
 function lvldown() {
-
   lvl--;
   chrome.storage.sync.set({ "nivel": lvl }, function(){
   });
@@ -119,21 +120,20 @@ chrome.notifications.onButtonClicked.addListener(function(notifId, btnIdx) {
     //on success
     if (btnIdx === 0) {
       progression += 25;
-      if(progression == 100) {
+      if (progression == 100) {
         lvlup();
         progression = 0;
-      } 
+      }
     }
     //on Fail
     else if (btnIdx === 1) {
       progression -= 25;
-      if(progression < 0) {
+      if (progression < 0) {
         lvldown();
         progression = 75;
       }
     }
-     //Set storage
-     chrome.storage.sync.set({ "store": progression }, function(){
-    });
+    //Set storage
+    chrome.storage.sync.set({ store: progression }, function() {});
   }
 });

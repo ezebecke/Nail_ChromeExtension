@@ -1,19 +1,19 @@
 body {
-    min-width: 250px;
+  min-width: 250px;
 }
 img {
-    width: 50%;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+  width: 50%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 h1 {
-    text-align: center;
+  text-align: center;
 }
 .options {
-    text-decoration: none;
-    font-size: 1rem;
+  text-decoration: none;
+  font-size: 1rem;
 }
 .options:hover {
-    color: rgb(19, 143, 19);
+  color: rgb(19, 143, 19);
 }
