@@ -36,7 +36,7 @@ if (window.Notification) {
       showme();
       interval = 0;
     }
-  }, 60000); //60000 when not in test mode
+  }, 10000); //60000 when not in test mode
 }
 
 /*
@@ -52,7 +52,7 @@ function showme(){
     title:   "Be honest with yourself!",
     message: "It's time to check if you were biting your nails!",
     contextMessage: "lvl exp: "+ progression + "%",
-    progress: progression,
+    progress: Math.ceil(progression),
     buttons: [{
         title: "I'm keeping them out off my mouth!",
         iconUrl: "img/success.png"
@@ -73,7 +73,7 @@ function lvlup() {
   //notification progress 100%
   chrome.notifications.create("progress100", {
     type:    "progress",
-    iconUrl: "img/nailimg.png",
+    iconUrl: "img/welldone.png",
     title:   "LVL UP!",
     message: "Good job",
     contextMessage: "You made it to lvl: "+lvl+", keep resisting!",
@@ -82,16 +82,6 @@ function lvlup() {
       myNotification100= id;
     });
 
-  //notification lvl up with image
-  chrome.notifications.create("notfyId", {
-    type:    "image",
-    iconUrl: "img/nailimg.png",
-    title:   "LVL UP!",
-    message: "Good job",
-    imageUrl: "img/welldone.png",
-  }, function(id) {
-      myNotificationID = id;
-    });
 }
 
 //Function when lvl down
@@ -119,10 +109,22 @@ chrome.notifications.onButtonClicked.addListener(function(notifId, btnIdx) {
   if (notifId === myNotificationID) {
     //on success
     if (btnIdx === 0) {
-      progression += 25;
-      if (progression == 100) {
+      
+      if(lvl === 0){
+        progression += 100;
+      }else if(lvl >0 && lvl <= 5) {
+        progression += 50;
+      }else if(lvl >5 && lvl <= 15) {
+        progression += 33.3;
+      }else if(lvl>15 && lvl<= 30) {
+        progression += 25;
+      }else {
+        progression += 20;
+      }
+      
+      if (progression > 99) {
         lvlup();
-        progression = 0;
+        progression = Math.ceil(progression) - 100;
       }
     }
     //on Fail

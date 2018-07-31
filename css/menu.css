@@ -17,3 +17,12 @@ h1 {
 .options:hover {
   color: rgb(19, 143, 19);
 }
+.lvlimage {
+  display: flex;
+  align-items: center;
+}
+.lvlimage img{
+  width: auto;
+  margin-left: 10px;
+  margin-right: 20px;
+}

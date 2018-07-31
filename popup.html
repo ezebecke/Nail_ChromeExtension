@@ -2,25 +2,24 @@
     <head>
         <title>Nail Keeper</title>
         <link href="css/menu.css" rel="stylesheet" type="text/css">
-        <script type="text/javascript" src="background.js"></script> 
+        <script type="text/javascript" src="background.js"></script>
         <script src="options.js"></script>
     </head>
     <body>
         <img src="img/nailimg.png" alt="nails">
         <h1>Nail Keeper</h1>
         <div>
-            lvl: 
-            <span id="nivelador"></span>
-        </div>
-        <div>
-            Exp: 
-            <span id="insertexp"> </span>
+            <div class="currentLvl">
+                <p>lvl: <span id="nivelador"></span></p>
+                <p>Exp: <span id="insertexp"></span></p>
+            </div>
         </div>
         <h2>Options:</h2>
         <form id="options">
             <input type="checkbox" name="isActivated" checked>
             Run notifications every
             <select name="frequency">
+                <option>0.1</option>
                 <option>5</option>
                 <option>10</option>
                 <option>20</option>
