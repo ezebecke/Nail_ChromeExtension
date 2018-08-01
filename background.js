@@ -36,7 +36,7 @@ if (window.Notification) {
       showme();
       interval = 0;
     }
-  }, 10000); //60000 when not in test mode
+  }, 60000); //60000 when not in test mode
 }
 
 /*

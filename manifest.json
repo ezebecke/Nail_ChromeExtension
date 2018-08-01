@@ -2,7 +2,7 @@
   "name": "Nail Keeper",
   "version": "1.1",
   "description":
-    "Helping you keeping your hands on the keyboard and not your mouth!",
+    "Helping you keeping your hands on the keyboard and away from your mouth!",
   "icons": {"16": "img/nailimg.png", "48": "img/nailimg.png", "128": "img/nailimg.png"},
   "permissions": [
     "notifications",
@@ -16,5 +16,6 @@
   "manifest_version": 2,
   "web_accessible_resources": [
     "img/nailimg.png"
-  ]
+  ],
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com; object-src 'self'"
 }
